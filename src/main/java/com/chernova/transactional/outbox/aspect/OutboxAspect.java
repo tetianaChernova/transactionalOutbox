@@ -12,10 +12,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class OutboxAspect {
 
-	public OutboxAspect() {
-		System.out.println("in non arguments constructor in aspect class");
-	}
-
 	@Around("@annotation(withTransactionalOutboxAnnotation)")
 	public Object withTransactionalOutbox(ProceedingJoinPoint joinPoint, WithTransactionalOutbox withTransactionalOutboxAnnotation)
 			throws Throwable {

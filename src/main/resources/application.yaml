@@ -1,0 +1,31 @@
+transactionaloutbox:
+  test: Tetiana
+  connector:
+    class: test
+  database:
+    hostname: test
+    port: 3306
+    user: debezium
+    password: dbz
+    server:
+      id: 42
+      name: asgard
+    history:
+      kafka:
+        topic: dbhistory.demo
+        bootstrap:
+          servers: broker:9092
+    key:
+      converter:
+        schema:
+          registry:
+            url: http://schema-registry:8081
+    value:
+      converter:
+        schema:
+          registry:
+            url: http://schema-registry:8081
+
+connect:
+  url: http://localhost:8083
+  config-path: /connectors

@@ -1,9 +1,8 @@
 transactionaloutbox:
-  test: Tetiana
   connector:
     class: test
   database:
-    hostname: test
+    hostname: mysql
     port: 3306
     user: debezium
     password: dbz
@@ -29,3 +28,12 @@ transactionaloutbox:
 connect:
   url: http://localhost:8083
   config-path: /connectors
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database: mysql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect

@@ -10,7 +10,6 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties(prefix = "transactionaloutbox")
 @PropertySource(value = "classpath:application.yaml", factory = YamlPropertySourceFactory.class)
 public class TransactionalOutboxConfigurationProperties {
-	private String test;
 	private String connectorClass;
 	private Database database;
 	private String databaseHistoryKafkaBootstrapServers;
@@ -19,7 +18,7 @@ public class TransactionalOutboxConfigurationProperties {
 	private String valueConverterSchemaRegistryUrl;
 
 	@Data
-	public static class Database{
+	public static class Database {
 		private String hostname;
 		private String port;
 		private String user;

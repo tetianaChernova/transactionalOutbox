@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "outboxevent")
 public class Event {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_ids")
 	@SequenceGenerator(name = "event_ids", sequenceName = "seq_event", allocationSize = 50)

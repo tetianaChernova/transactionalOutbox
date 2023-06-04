@@ -2,6 +2,7 @@ package com.chernova.transactional.outbox;
 
 import java.util.Properties;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.PropertySource;
@@ -10,6 +11,7 @@ import org.springframework.core.io.support.PropertySourceFactory;
 
 import static java.util.Objects.requireNonNull;
 
+@Slf4j
 public class YamlPropertySourceFactory
 		implements PropertySourceFactory {
 
@@ -19,7 +21,7 @@ public class YamlPropertySourceFactory
 		factory.setResources(encodedResource.getResource());
 
 		Properties properties = factory.getObject();
-		System.out.println("properties: " + properties);
+		log.info("properties: {}", properties);
 
 		return new PropertiesPropertySource(
 				requireNonNull(encodedResource.getResource().getFilename()),

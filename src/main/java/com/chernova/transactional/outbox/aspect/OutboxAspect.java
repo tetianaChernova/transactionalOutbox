@@ -13,6 +13,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -20,14 +22,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class OutboxAspect {
-
 	private final EventService eventService;
 	private final ObjectMapper objectMapper;
 
 	@Around(value = "@annotation(withTransactionalOutboxAnnotation)")
 	public Object withTransactionalOutbox(ProceedingJoinPoint joinPoint, WithTransactionalOutbox withTransactionalOutboxAnnotation)
 			throws Throwable {
-		System.out.println("Triggered join point with withTransactionalOutbox annotation");
+		log.debug("Triggered join point with withTransactionalOutbox annotation");
 		Object result = joinPoint.proceed();
 
 		String jsonData = "{}";
@@ -41,9 +42,7 @@ public class OutboxAspect {
 			for (Annotation annotation : annotations[i]) {
 				if (annotation instanceof OutboxEvent) {
 					annotatedArgument = args[i];
-					System.out.println(objectMapper);
 					jsonData = objectMapper.writeValueAsString(annotatedArgument);
-					System.out.println("jsonData: " + jsonData);
 					break;
 				}
 			}
@@ -52,7 +51,7 @@ public class OutboxAspect {
 		Event event = new Event();
 		event.setData(jsonData);
 		eventService.createEvent(event);
-		System.out.println("After proceeding joinPoint");
+		log.debug("After proceeding joinPoint");
 		return result;
 	}
 }

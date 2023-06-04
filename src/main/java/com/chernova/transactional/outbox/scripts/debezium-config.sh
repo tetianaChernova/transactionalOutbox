@@ -1,5 +1,5 @@
 curl -i -X PUT -H "Content-Type:application/json" \
-  http://localhost:8083/connectors/source-debezium-order-events/config \
+  http://localhost:8083/connectors/source-debezium-order-events-test/config \
   -d '{
             "connector.class": "io.debezium.connector.mysql.MySqlConnector",
             "database.hostname": "mysql",

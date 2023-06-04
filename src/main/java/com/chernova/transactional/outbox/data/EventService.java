@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EventService {
-
 	private final EventRepo eventRepo;
 
 	public void createEvent(Event event) {
